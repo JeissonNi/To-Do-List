@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         taskInput.value = "";
     }
 
-    // Marcar tarea como completada o eliminarla
+    // Marcar tarea como completada , eliminarla o editarla
     taskList.addEventListener("click", function(event) {
         const id = Number(event.target.dataset.id);
 
@@ -41,7 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
             tasks = tasks.map(task =>
                 task.id === id ? { ...task, completed: !task.completed } : task
             );
+        }else if (event.target.classList.contains("edit")) {
+            editTask(id);
         }
+        
         saveTasks();
         renderTasks();
     });
@@ -49,6 +52,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Guardar tareas en LocalStorage
     function saveTasks() {
         localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+
+    //Editar tareas
+    function editTask(id) {
+        tasks = tasks.map(task => {
+            if (task.id === id) {
+                const newText = prompt("Editar tarea:", task.text);
+                if (newText !== null && newText.trim() !== "") {
+                    return { ...task, text: newText.trim() };
+                }
+            }
+            return task;
+        });
+
+        saveTasks();
+        renderTasks();
     }
 
     // Renderizar tareas
@@ -59,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
             li.innerHTML = `
                 <span class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">${task.text}</span>
                 <div class="buttons">
+                    <button class="edit" data-id="${task.id}">✏️</button>
                     <button class="complete" data-id="${task.id}">✔</button>
                     <button class="delete" data-id="${task.id}">❌</button>
                 </div>
