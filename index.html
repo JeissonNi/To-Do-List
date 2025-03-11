@@ -9,9 +9,18 @@
 <body>
     <div class="container">
         <h1>Lista de Tareas</h1>
+        
         <div class="todo-input">
             <input type="text" id="taskInput" placeholder="Añadir nueva tarea">
             <button id="addTaskBtn">Agregar</button>
+        </div>
+        <div class="filter-container">
+            <label for="filter">Filtrar:</label>
+            <select id="filter">
+                <option value="all">Todas</option>
+                <option value="completed">Completadas</option>
+                <option value="pending">Pendientes</option>
+            </select>
         </div>
         <ul id="taskList"></ul>
     </div>

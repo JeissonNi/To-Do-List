@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const taskInput = document.getElementById("taskInput");
     const addTaskBtn = document.getElementById("addTaskBtn");
     const taskList = document.getElementById("taskList");
+    const filter = document.getElementById("filter");
+
+    //
+    filter.addEventListener("change", renderTasks);
 
     // Cargar tareas guardadas
     let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
@@ -99,7 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Renderizar tareas
     function renderTasks() {
         taskList.innerHTML = "";
+        const filterValue = filter.value;
+    
         tasks.forEach(task => {
+            if (filterValue === "completed" && !task.completed) return;
+            if (filterValue === "pending" && task.completed) return;
+    
             const li = document.createElement("li");
             li.innerHTML = `
                 <span class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">${task.text}</span>
