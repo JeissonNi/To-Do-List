@@ -34,9 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Marcar tarea como completada o eliminarla
     taskList.addEventListener("click", function(event) {
         const id = Number(event.target.dataset.id);
+
         if (event.target.classList.contains("delete")) {
             tasks = tasks.filter(task => task.id !== id);
-        } else if (event.target.classList.contains("task-item")) {
+        } else if (event.target.classList.contains("complete")) {
             tasks = tasks.map(task =>
                 task.id === id ? { ...task, completed: !task.completed } : task
             );
@@ -57,7 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const li = document.createElement("li");
             li.innerHTML = `
                 <span class="task-item ${task.completed ? 'completed' : ''}" data-id="${task.id}">${task.text}</span>
-                <button class="delete" data-id="${task.id}">❌</button>
+                <div class="buttons">
+                    <button class="complete" data-id="${task.id}">✔</button>
+                    <button class="delete" data-id="${task.id}">❌</button>
+                </div>
             `;
             taskList.appendChild(li);
         });

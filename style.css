@@ -31,6 +31,7 @@ button {
     border: none;
     padding: 8px 10px;
     cursor: pointer;
+    margin-left: 5px;
 }
 
 ul {
@@ -51,4 +52,25 @@ li {
 .completed {
     text-decoration: line-through;
     color: gray;
+}
+
+.buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.complete {
+    background-color: #007bff;
+    border-radius: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.delete {
+    background-color: #dc3545;
+    border-radius: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
 }
