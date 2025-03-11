@@ -26,7 +26,7 @@ input {
 }
 
 button {
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 8px 10px;
@@ -54,13 +54,14 @@ li {
     color: gray;
 }
 
-.buttons {
-    display: flex;
-    gap: 5px;
+
+.task-buttons {
+    display: flex; 
+    gap: 5px; /* Espaciado uniforme entre botones */
 }
 
 .complete {
-    background-color: #007bff;
+    background-color: #28a745;
     border-radius: 5px;
     padding: 5px;
     height: 30px;
@@ -74,3 +75,22 @@ li {
     height: 30px;
     width: 30px;
 }
+
+.edit {
+    background-color: #ffc107;
+    border-radius: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.edit-input {
+    width: 60%;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 30px;
+    width: 30px;
+}
+
