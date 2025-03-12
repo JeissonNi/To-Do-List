@@ -194,3 +194,14 @@ li {
     background-color: #121212;
     color: white;
 }
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.container2 {
+    flex: 1; /* Esto hace que la parte principal del contenido ocupe el espacio disponible */
+}
