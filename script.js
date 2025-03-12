@@ -1,3 +1,5 @@
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
 document.addEventListener("DOMContentLoaded", () => {
     const taskInput = document.getElementById("taskInput");
     const addTaskBtn = document.getElementById("addTaskBtn");
@@ -136,13 +138,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+
+/* Inicio modo oscuro */
 const toggleThemeBtn = document.getElementById("toggleTheme");
 
 // Cargar la preferencia guardada
 document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("darkMode") === "enabled") {
         document.body.classList.add("dark-mode");
-        toggleThemeBtn.textContent = "☀️ Modo Claro";
+        toggleThemeBtn.textContent = "☀️";
     }
 });
 
@@ -158,3 +162,27 @@ toggleThemeBtn.addEventListener("click", () => {
         toggleThemeBtn.textContent = "🌙";
     }
 });
+/* Fin modo oscuro */
+
+/* Inicio funcionalidad exportar e importar JSON */
+const exportBtn = document.getElementById("exportTasks");
+
+// Exportar tareas a un archivo JSON
+exportBtn.addEventListener("click", () => {
+    // Recargar la variable tasks con la versión más reciente del localStorage
+    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    if (tasks.length === 0) {
+        alert("No hay tareas para exportar.");
+        return;
+    }
+
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tasks));
+    const downloadAnchor = document.createElement("a");
+    downloadAnchor.setAttribute("href", dataStr);
+    downloadAnchor.setAttribute("download", "tareas.json");
+    document.body.appendChild(downloadAnchor);
+    downloadAnchor.click();
+    document.body.removeChild(downloadAnchor);
+});
+/* Fin funcionalidad exportar e importar JSON */

@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+        <button id="toggleTheme">🌙</button>
         <h1>Lista de Tareas</h1>
         
         <div class="todo-input">
@@ -25,7 +26,8 @@
         <ul id="taskList"></ul>
         <p id="pendingTasks">Tareas pendientes: 0</p>
         <p id="completedTasks">Tareas completadas: 0</p>
-        <button id="toggleTheme">🌙</button>
+        <button id="exportTasks">📤 Exportar</button>
+        <input type="file" id="importTasks" accept=".json">
     </div>
     <script src="script.js"></script>
 </body>
