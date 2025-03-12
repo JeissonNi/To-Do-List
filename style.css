@@ -173,7 +173,7 @@ li {
 .footer {
     text-align: center;
     padding: 15px;
-    background-color: #f8f8f8;
+    background-color: #f4f4f4;
     color: #333;
     font-size: 14px;
     margin-top: 20px;
@@ -181,11 +181,16 @@ li {
 }
 
 .footer a {
-    color: #e63946;
+    color: #007bff;
     text-decoration: none;
     font-weight: bold;
 }
 
 .footer a:hover {
     text-decoration: underline;
+}
+
+.dark-mode .footer{
+    background-color: #121212;
+    color: white;
 }
