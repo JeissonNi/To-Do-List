@@ -113,3 +113,42 @@ li {
     font-weight: bold;
     margin-top: 10px;
 }
+
+/*MODO OSCURO*/
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .container {
+    background-color: #1e1e1e;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode button {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid white;
+}
+
+.dark-mode li{
+    background-color: #333;
+}
+
+.dark-mode .complete{
+    background-color: #28a745;
+}
+
+.dark-mode .delete{
+    background-color: #dc3545;
+}
+
+.dark-mode .edit{
+    background-color: #ffc107;
+}
+
+.dark-mode input, .dark-mode select {
+    background-color: #333;
+    color: white;
+    border: 1px solid white;
+}

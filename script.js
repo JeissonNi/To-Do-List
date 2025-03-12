@@ -135,3 +135,26 @@ document.addEventListener("DOMContentLoaded", () => {
         updatePendingCount(); // 🔄 Actualizar contador
     }
 });
+
+const toggleThemeBtn = document.getElementById("toggleTheme");
+
+// Cargar la preferencia guardada
+document.addEventListener("DOMContentLoaded", () => {
+    if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
+        toggleThemeBtn.textContent = "☀️ Modo Claro";
+    }
+});
+
+toggleThemeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    // Guardar la preferencia
+    if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        toggleThemeBtn.textContent = "☀️";
+    } else {
+        localStorage.setItem("darkMode", "disabled");
+        toggleThemeBtn.textContent = "🌙";
+    }
+});
