@@ -136,10 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         updatePendingCount(); // 🔄 Actualizar contador
     }
-});
 
-
-/* Inicio modo oscuro */
+    /* Inicio modo oscuro */
 const toggleThemeBtn = document.getElementById("toggleTheme");
 
 // Cargar la preferencia guardada
@@ -162,27 +160,68 @@ toggleThemeBtn.addEventListener("click", () => {
         toggleThemeBtn.textContent = "🌙";
     }
 });
-/* Fin modo oscuro */
+    /* Fin modo oscuro */
 
-/* Inicio funcionalidad exportar e importar JSON */
-const exportBtn = document.getElementById("exportTasks");
+    /* Inicio funcionalidad exportar e importar JSON */
+    const exportBtn = document.getElementById("exportTasks");
+    const importFile = document.getElementById("importFile");
+    const importBtn = document.getElementById("importBtn");
 
-// Exportar tareas a un archivo JSON
-exportBtn.addEventListener("click", () => {
-    // Recargar la variable tasks con la versión más reciente del localStorage
-    tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    // Exportar tareas a un archivo JSON
+    exportBtn.addEventListener("click", () => {
+        // Recargar la variable tasks con la versión más reciente del localStorage
+        tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-    if (tasks.length === 0) {
-        alert("No hay tareas para exportar.");
-        return;
-    }
+        if (tasks.length === 0) {
+            alert("No hay tareas para exportar.");
+            return;
+        }
 
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tasks));
-    const downloadAnchor = document.createElement("a");
-    downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute("download", "tareas.json");
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    document.body.removeChild(downloadAnchor);
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(tasks));
+        const downloadAnchor = document.createElement("a");
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", "tareas.json");
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        document.body.removeChild(downloadAnchor);
+    });
+
+    //Importar JSON
+    importBtn.addEventListener("click", () => {
+        if (!importFile.files.length) {
+            alert("Selecciona un archivo JSON.");
+            return;
+        }
+
+        const file = importFile.files[0];
+        const reader = new FileReader();
+
+        reader.onload = function (event) {
+            try {
+                const importedTasks = JSON.parse(event.target.result);
+                
+                if (!Array.isArray(importedTasks)) {
+                    throw new Error("Formato de archivo inválido.");
+                }
+
+                // Validar que cada tarea tenga las propiedades correctas
+                importedTasks.forEach(task => {
+                    if (typeof task.text !== "string" || typeof task.completed !== "boolean") {
+                        throw new Error("Datos inválidos en el archivo.");
+                    }
+                });
+
+                tasks = importedTasks;  // Sobrescribe las tareas actuales
+                saveTasks();
+                renderTasks();
+
+                alert("Tareas importadas correctamente.");
+            } catch (error) {
+                alert("Error al importar el archivo: " + error.message);
+            }
+        };
+
+        reader.readAsText(file);
+    });
+    /* Fin funcionalidad exportar e importar JSON */
 });
-/* Fin funcionalidad exportar e importar JSON */
