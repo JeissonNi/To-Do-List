@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         tasks.push(task);
         saveTasks();
         renderTasks();
+        updatePendingCount();
         taskInput.value = "";
     }
 
@@ -49,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
             saveTasks();
             renderTasks();
+            updatePendingCount(); // 🔄 Actualizar contador
         } else if (event.target.classList.contains("edit")) {
             enableEdit(id);
         }
@@ -100,6 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 
+    //Tareas pendientes
+    function updatePendingCount() {
+        const pendingCount = tasks.filter(task => !task.completed).length;
+        const completedCount = tasks.filter(task => task.completed).length;
+
+        document.getElementById("pendingTasks").textContent = `Tareas pendientes: ${pendingCount}`;
+        document.getElementById("completedTasks").textContent = `Tareas terminadas: ${completedCount}`;
+    }
+    
+
     // Renderizar tareas
     function renderTasks() {
         taskList.innerHTML = "";
@@ -120,5 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             taskList.appendChild(li);
         });
+        updatePendingCount(); // 🔄 Actualizar contador
     }
 });

@@ -109,3 +109,7 @@ li {
     width: 30px;
 }
 
+#pendingTasks, #completedTasks {
+    font-weight: bold;
+    margin-top: 10px;
+}
